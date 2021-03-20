@@ -12,4 +12,15 @@ router.post('/', async (req, res) => {
 
   res.status(201).send(user)
 })
+
+router.post('/:id/attended-courses', async (req, res) => {
+  const user = await User.findById(req.params.id)
+
+  // eslint-disable-next-line no-underscore-dangle
+  user.attendedCourses.push(req.body._id)
+
+  await user.save()
+
+  res.sendStatus(200)
+})
 module.exports = router
