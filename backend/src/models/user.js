@@ -5,8 +5,15 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      unique: true,
+      required: true,
     },
+    attendedCourses: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course',
+        autopopulate: { maxDepth: 2 },
+      },
+    ],
   },
   { timestamps: true }
 )
